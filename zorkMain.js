@@ -6,6 +6,7 @@ function ask(questionText) {
     rl.question(questionText, resolve);
   });
 }
+// test
 /////////////////////////////////////Player \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 let power = 10;
 let playerLife = 100;
