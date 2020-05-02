@@ -133,40 +133,38 @@ async function startGame() {
 
             let answer = await ask(">_");
             if (answer.includes("mail box")) {
-                console.log("You are near to a mail box , what could be inside ? \n");
-                let answer2 = await ask(">_");
-                if (answer2.includes("open") || answer2.includes("examine")) {
+                console.log("You are near to a mail box , what could be inside ? \n");}
+             else if (answer.includes("open") || answer.includes("examine")) {
                     console.log("You found " + lvl1.mailBox);
                 }
-                let answer3 = await ask(">_");
-                if (answer3.includes("read") || answer3.includes("open")) {
+               else if (answer.includes("read") || answer.includes("open")) {
                     playerStats.iventory.push(firstletter1)
                     console.log("Act1-Letter is in your invetory");
                     callLetters();
                 }
-            }
-            if (answer.includes("body") || answer.includes("first body")) {
+            
+             else if (answer.includes("body") || answer.includes("first body")) {
                 console.log("You see a dead frozen body, It looks like he is wearing a armor!")
-                let answer5 = await ask(">_");
-                if (answer5.includes("examine") || answer5.includes("open")) {
-                    console.log(itemList.armor)
-                    let answer6 = await ask(">_");
-                    if (answer6.includes("equip") || answer6.includes("grab")) {
-                        console.log(playerEquip.armor.push(itemList.armor))
+               }
+              else  if (answer.includes('open') || answer.includes('examine')) {
+                    console.log(itemList.armor)}
+                  else  if (answer.includes("equip") || answer.includes("grab")) {
+                        playerEquip.armor = itemList.armor;
+                        console.log("You equiped OGE - Shirt! \n")
                         firstLvl1();
                     }
-                    let answer7 = await ask(">_");
-                    if (answer7.includes("gremelin")) {
+                
+             else if (answer.includes("monster")) {
                         console.log("A Gremeling is walking towards you!");
                     }
-                    if (answer.includes("attack")) {
+                 else if (answer.includes("attack")) {
                         appearMOb();
                     } else {
                         console.log("Wrong action you are back at the beggining!");
                         firstLvl1();
                     }
-                }
-            }
+                
+            
         }
     }
     ////////////////////////////////Functions call letters\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -220,10 +218,9 @@ async function appearMOb() {
 async function lootMonster() {
     console.log("Do you want to loot?")
     let answer4 = await ask(">_");
-    let myinventory = mob.Gremelin.iventory
     if (answer4.includes("loot") || answer4.includes("open"));
     console.log("You grabed everything!\n");
-    console.log(myinventory + playerStats.iventory);
+   mob.Gremelin.iventory.push(playerStats.iventory)
     goToBoss();
 }
 async function goToBoss() {
