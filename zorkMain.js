@@ -66,9 +66,14 @@ let mob = {
             sword: "Katana",
             boots: "Old pair of boots"
 
-        }
+        },
+        Gremelinlvl2: {
+            iventory: {
+                wallet: "$" + 4.20 + " Dollars",
+                sword: "Katana",
+                boots: "Old pair of boots"
     }
-}
+}}}
 
 let bigBossHP = 100;
 let bigBoos = {
@@ -79,19 +84,22 @@ let bigBoos = {
         card: "Pass 789123"
     }
 }
-let deadBodys = {
-
-}
-/////////////////////////////Starting items \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-let items = {
-    sword: {
-        power: 1,
-        strength: 3
+//DeadBodys
+let deadlvl2 ={
+    iventory: {
+        wallet : "$42 "
     },
-    backback: {
+    Pocket :{
 
     }
 }
+/////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+let trash ={
+    Useless: "",
+    Pizza :"Mr.mike pizza",
+    soda : "Coke"
+}
+    
 
 
 
@@ -99,13 +107,34 @@ let items = {
 /////////////////////////////LVLS--------ROOMS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 //WEre you start 
-let lvl1name = "182 Main St."
 let lvl1 = {
     name: "182 Main St.",
     romm: " A mail box , A dead body , A monster!\n",
     mailBox: "Act1-Letter"
 }
-
+//lvl2
+let lvl2 ={
+    name: "Foyer",
+    rommAisle:{
+    North: "Dead body, Trash Can, A Gremelin, A Beholder",
+    northEast:""
+    },
+    description: "A Really old Foyer, Cold with lamps and torches around the room,\n "
+}
+async function northRoom(){
+    console.log("You chosed the north path!")
+    let answer = await ask(">_")
+    if (answer.includes("check") || answer.includes("look")){
+        console.log(lvl2.rommAisle.North)
+    }
+}
+async function northEastRoom(){
+    console.log("Dangerous monster surround this path, be prepared for anything")
+    let answer = await ask(">_")
+    if(answer.includes("check")){
+        console.log(lvl2.rommAisle.northEast);
+    }
+}
 ///// function if 1 attack else 
 
 start();
@@ -114,7 +143,7 @@ async function start() {
     let gameStart = await ask("Hello " + travelerName + " do you want to play the game ? \n");
     if (gameStart == 'yes' || gameStart == 'y') {
         startGame();
-    }
+ 2   }
 }
 ////////////////////////// Historia \\\\\\\\\\\\\\\\\\\\\\\\
 async function startGame() {
@@ -128,7 +157,7 @@ async function startGame() {
 
     async function firstLvl1() {
         playerPosition.currentRoom = "182 Main St."
-        console.log("Your are in " + lvl1name + " you can see, \n" + lvl1.romm + " \n");
+        console.log("Your are in " + lvl.name + " you can see, \n" + lvl1.romm + " \n");
         while (playerPosition.currentRoom == "182 Main St.") {
 
             let answer = await ask(">_");
@@ -253,28 +282,128 @@ async function startBossFight() {
         }
         else if (answer > bossAnswer) {
             console.log("Zotac - - HAHAHAH Try again its bigger then that!")
-            guessCount--;
+          
             console.log("Your Hp now is" + (playerLife - 15));
         }
         else if (answer < bossAnswer) {
             console.log("Zotac - - HAHAHAH Try again its bigger then that!")
-            guessCount--;
+            
             console.log("Your HP now is" + (playerLife - 15));
         }
     }
 }
 
 
-
-// LVL 2 
+/////////**********************************************************************************************************////////////////////////// */
+/*Create  north and south paths,
+South 
+- maybe the moster cast a speel of sleep ( takes to another dimecion)
+- a portal for another side boss
+- */
 async function startlvl2() {
     playerPosition.currentRoom = "182 Main St. - Foyer";
-    console.log("You are now at Foyer!")
-    console.log()
+    console.log("You are now at Foyer! " + lvl2.description)
     while (playerPosition.currentRoom === "182 Main St. - Foyer") {
         let action = await ask(">_")
-        if (action.includes("")) {
-
+        if (action.includes("look around") || action.includes("look") || action.includes("check")) {
+          console.log(lvl2.rommAisle)
         }
+     else if (action.includes("north")){
+         northRoom();
+         }
+     else if (action.includes("east")){
+         console.log("You chosed the North East  path!")
+         northEastRoom()
+     }
+
+
+    else if (action.includes("trash")){
+        console.log("You can see a trash can")
+
+    }
+    else if (action.includes("check trash") || action.includes("check")){
+        console.log(trash);
+    }
+    else if (action.includes("grab pizza") || action.includes("pizza")){
+        trash.Pizza.push(playerStats.iventory);
+    }
+    else if (action.includes("monster") || action.includes("gremelin")){
+    mob();
+
+
+    async function mob() {
+        let gremAttackMin = 3;
+        let gremAttackMax = 17;
+        let trueAttack = Math.floor(Math.random() * gremAttackMax) + 3;
+        let mylife = 100;
+        let maxNum = 2;
+        let x = Math.floor(Math.random() * maxNum);
+        let meuDano = power + sword.swordlvl1.power;
+        while (gremHP > 1 || gremHP <= 100) {
+            console.log("Chose between a number 1 or 2 , if you get the number wrong you will get some damage  (:");
+            console.log(" If you get it right you will evade and give some damage back")
+            let tentar = await ask(">_");
+            if (tentar === x) {
+                console.log("You avoid being attacked and attacked back!");
+                console.log("Your attacked damage was" + meuDano);
+                console.log("Gremelin HP now is " + (gremHP - meuDano));
+                gremHP = gremHP - meuDano;
+                mob();
+    
+            } if (tentar < x || tentar > x) {
+                console.log("You got attacked!")
+                mylife = mylife - trueAttack
+                console.log("You lose " + trueAttack + "!");
+                console.log("Your Hp now is" + mylife)
+            }
+        
+        if (gremHP === 0) {
+            console.log("You defeat Gremelin!")
+            lootMonster()
+        }}
+    }
+    async function lootMonster() {
+        console.log("Do you want to loot?")
+        let answer4 = await ask(">_");
+        if (answer4.includes("loot") || answer4.includes("open"));
+        console.log("You grabed everything!\n");
+       mob.Gremelin.iventory.push(playerStats.iventory)
+        behemot();
+    }
+    
+    async function behemot() {
+        console.log("")
+        var answer = Math.floor(Math.random() * 3) + 1;
+        console.log("The Boss rules => You have 5 chances to try to guess a number between 1-100!")
+        console.log("Eache time you get it wrong you lose 15HP")
+        while (bigBoos.HP > 1 || bigBoos.HP <= 100) {
+            let bossAnswer = await ask(">_")
+            if (answer === bossAnswer) {
+                console.log("It was a critical hit!")
+                console.log(" Coff Coff! This is not going to be the last time!")
+                console.log(bigBoos.iventory);
+    
+                let newlvl = await ask(">_");
+                if (newlvl.includes("walk") || newlvl.includes("789123")) {
+                    startlvl2();
+                }
+                if (newlvl.includes("open") || newlvl.includes("grab")) {
+                    bigBoos.iventory.push(playerStats.iventory);
+                }
+            }
+            else if (answer > bossAnswer) {
+                console.log("Zotac - - HAHAHAH Try again its bigger then that!")
+              
+                console.log("Your Hp now is" + (playerLife - 15));
+            }
+            else if (answer < bossAnswer) {
+                console.log("Zotac - - HAHAHAH Try again its bigger then that!")
+                
+                console.log("Your HP now is" + (playerLife - 15));
+            }
+        }
+    }
+
+    }
     }
 }
