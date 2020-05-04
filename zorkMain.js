@@ -87,7 +87,7 @@ let bigBoos = {
 //DeadBodys
 let deadlvl2 ={
     iventory: {
-        wallet : "$42 "
+        wallet : "$42"
     },
     Pocket :{
 
@@ -119,17 +119,43 @@ let lvl2 ={
     North: "Dead body, Trash Can, A Gremelin, A Beholder",
     northEast:""
     },
-    description: "A Really old Foyer, Cold with lamps and torches around the room,\n "
+    description: "A Old Foyer, Cold with lamps and torches around the room,\n "
 }
+let npc1 = {
+    Name : "",
+    Dialog: "",
+    Quest: ""
+}
+async function lvl2Npc(){
+    function npc1(){
+
+    }
+}
+
 async function northRoom(){
     console.log("You chosed the north path!")
     let answer = await ask(">_")
     if (answer.includes("check") || answer.includes("look")){
         console.log(lvl2.rommAisle.North)
     }
+    else if(answer.includes("body")){
+        console.log("You can see a dead Frozen Body!")
+    }
+    else if(answer.includes("examine")){
+        console.log(deadlvl2.iventory)
+    }
+    else if(answer.includes("grab")){
+        deadlvlvl2.iventory.push(playerStats.iventory)
+    }
+    else if(answer.includes("trash")){
+        console.log("Stinky Trash can, i can smell it from down the street!")
+        console.log(trash)
+    }
+    else if(answer.includes(""))
 }
 async function northEastRoom(){
-    console.log("Dangerous monster surround this path, be prepared for anything")
+    console.log("Walking down the NorthStreet, you can fell this felling of being watched all the time.")
+    console.log("")
     let answer = await ask(">_")
     if(answer.includes("check")){
         console.log(lvl2.rommAisle.northEast);
@@ -271,7 +297,7 @@ async function startBossFight() {
             console.log("It was a critical hit!")
             console.log(" Coff Coff! This is not going to be the last time!")
             console.log(bigBoos.iventory);
-
+console.log("Please use the note from The Boss Iventory!")
             let newlvl = await ask(">_");
             if (newlvl.includes("walk") || newlvl.includes("789123")) {
                 startlvl2();
@@ -302,8 +328,9 @@ South
 - */
 async function startlvl2() {
     playerPosition.currentRoom = "182 Main St. - Foyer";
-    console.log("You are now at Foyer! " + lvl2.description)
-    while (playerPosition.currentRoom === "182 Main St. - Foyer") {
+console.log("Chose the right path thru the dungeon, and find the Eye of Beyond- Guarded by a powerful Beholder!\n")
+    while (playerPosition.currentRoom === "182 Main St. - Foyer") {    console.log("You are now at Foyer! " + lvl2.description)
+    console.log("You find yourself in a Strange Foyer, you have to find the ")
         let action = await ask(">_")
         if (action.includes("look around") || action.includes("look") || action.includes("check")) {
           console.log(lvl2.rommAisle)
@@ -317,22 +344,9 @@ async function startlvl2() {
      }
 
 
-    else if (action.includes("trash")){
-        console.log("You can see a trash can")
-
-    }
-    else if (action.includes("check trash") || action.includes("check")){
-        console.log(trash);
-    }
-    else if (action.includes("grab pizza") || action.includes("pizza")){
-        trash.Pizza.push(playerStats.iventory);
-    }
-    else if (action.includes("monster") || action.includes("gremelin")){
-    mob();
-
 
     async function mob() {
-        let gremAttackMin = 3;
+      
         let gremAttackMax = 17;
         let trueAttack = Math.floor(Math.random() * gremAttackMax) + 3;
         let mylife = 100;
@@ -406,4 +420,3 @@ async function startlvl2() {
 
     }
     }
-}
