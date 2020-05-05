@@ -425,3 +425,21 @@ console.log("Chose the right path thru the dungeon, and find the Eye of Beyond- 
     }
     }
 
+/*
+
+Do first
+--Need update Fight function,( infinity loop)
+*Hp is lowering bellow 0
+*Need 1Fix random attack function
+
+Working on it--( It will take a while)
+-- Items(Weapons, armors, consumables)
+
+*Add different classes for the game
+--Each classe will drop your only weapons and armors, and spells!
+
+* Game History
+
+
+
+*/ 
