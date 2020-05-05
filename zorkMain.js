@@ -246,8 +246,7 @@ async function appearMOb() {
     let gremAttackMax = 17;
     let trueAttack = Math.random(gremAttackMin, gremAttackMax);
     let mylife = 100;
-    let maxNum = 2;
-    let x = Math.floor(Math.random() * maxNum) + 1;
+    let x = Math.random(1,2) 
     let meuDano = power + sword.swordlvl1.power;
     while (gremHP > 1 || gremHP <= 100) {
         console.log("Chose between a number 1 or 2 , if you get the number wrong you will get some damage  (:");
@@ -258,13 +257,15 @@ async function appearMOb() {
             console.log("Your attacked damage was" + meuDano);
             console.log("Gremelin HP now is " + (gremHP - meuDano));
             gremHP = gremHP - meuDano;
-            appearMOb();
-
-        } if (tentar < x || tentar > x) {
+        } if (tentar !== x) {
             console.log("You got attacked!")
             mylife = mylife - trueAttack
             console.log("You lose " + trueAttack + "!");
             console.log("Your Hp now is" + mylife)
+        }
+        if (mylife === 0 ){
+            console.log("You died!!")
+            //function restart the game!
         }
     
           if (gremHP === 0) {
