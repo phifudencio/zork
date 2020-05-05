@@ -4,12 +4,6 @@ Make lvl 2 History
 make list of items 
 and add new things to lvl 1*/
 
-
-
-
-
-
-
 const readline = require('readline');
 const rl = readline.createInterface(process.stdin, process.stdout);
 
@@ -18,6 +12,7 @@ function ask(questionText) {
         rl.question(questionText, resolve);
     });
 }
+start();
 // test
 /////////////////////////////////////Player \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 let power = 10;
@@ -151,9 +146,11 @@ async function northRoom(){
         console.log("Stinky Trash can, i can smell it from down the street!")
         console.log(trash)
     }
-    else if(answer.includes(""))
+    else if(answer.includes("")){
+       
+    }
 }
-async function northEastRoom(){
+async function EastRoom(){
     console.log("Walking down the NorthStreet, you can fell this felling of being watched all the time.")
     console.log("")
     let answer = await ask(">_")
@@ -163,13 +160,16 @@ async function northEastRoom(){
 }
 ///// function if 1 attack else 
 
-start();
+
 async function start() {
     let travelerName = await ask("Please chose the player name \n")
     let gameStart = await ask("Hello " + travelerName + " do you want to play the game ? \n");
     if (gameStart == 'yes' || gameStart == 'y') {
         startGame();
- 2   }
+   }
+   else{
+       start();
+   }
 }
 ////////////////////////// Historia \\\\\\\\\\\\\\\\\\\\\\\\
 async function startGame() {
@@ -178,12 +178,14 @@ async function startGame() {
     console.log("\nZotac is the last famous Emperor of Elmoreden, the creator of the BCA-Tower of Insolence, and the bringer of the Golden Age.\nHe is also the father of Frintezza, the last Emperor, and of Saint Solina.  ")
     console.log("So let Your journey beggin....\n");
     firstLvl1();
+}
+
 
     /////////////// The journey \\\\\\\\\\\\\\\
 
     async function firstLvl1() {
         playerPosition.currentRoom = "182 Main St."
-        console.log("Your are in " + lvl.name + " you can see, \n" + lvl1.romm + " \n");
+        console.log("Your are in " + lvl1.name + " you can see, \n" + lvl1.romm + " \n");
         while (playerPosition.currentRoom == "182 Main St.") {
 
             let answer = await ask(">_");
@@ -235,16 +237,16 @@ async function startGame() {
         }
     }
     let firstletter1 = "Act1 - Letter"
-}
+
 
 //Mob function. FIX THIS  ( Infinnity loop)
 // hp is not lowering
 async function appearMOb() {
     let gremAttackMin = 3;
     let gremAttackMax = 17;
-    let trueAttack = Math.floor(Math.random() * gremAttackMax) + gremAttackMin;
+    let trueAttack = Math.random(gremAttackMin, gremAttackMax);
     let mylife = 100;
-    let maxNum = 3;
+    let maxNum = 2;
     let x = Math.floor(Math.random() * maxNum) + 1;
     let meuDano = power + sword.swordlvl1.power;
     while (gremHP > 1 || gremHP <= 100) {
@@ -264,10 +266,11 @@ async function appearMOb() {
             console.log("You lose " + trueAttack + "!");
             console.log("Your Hp now is" + mylife)
         }
-    }
-    if (gremHP === 0) {
+    
+          if (gremHP === 0) {
         console.log("You defeat Gremelin!")
         lootMonster()
+    }
     }
 }
 async function lootMonster() {
@@ -319,7 +322,6 @@ console.log("Please use the note from The Boss Iventory!")
     }
 }
 
-
 /////////**********************************************************************************************************////////////////////////// */
 /*Create  north and south paths,
 South 
@@ -339,8 +341,8 @@ console.log("Chose the right path thru the dungeon, and find the Eye of Beyond- 
          northRoom();
          }
      else if (action.includes("east")){
-         console.log("You chosed the North East  path!")
-         northEastRoom()
+         console.log("You chosed the  East  path!")
+         EastRoom()
      }
 
 
@@ -416,7 +418,10 @@ console.log("Chose the right path thru the dungeon, and find the Eye of Beyond- 
                 console.log("Your HP now is" + (playerLife - 15));
             }
         }
+      
+    }
+  
+   
+    }
     }
 
-    }
-    }
